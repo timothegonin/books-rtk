@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Jumbotron from "../../components/Jumbotron";
 import { addBook as addBookAction } from "./librarySlice";
+import List from "../../common/List";
 
 const LibraryView = () => {
 	const libraryData = useSelector((state) => state.library.books);
@@ -57,6 +58,9 @@ const LibraryView = () => {
 					</div>
 				</form>
 			</Jumbotron>
+			<main className="container">
+				<List data={libraryData} />
+			</main>
 		</>
 	);
 };
