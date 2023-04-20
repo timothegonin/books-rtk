@@ -1,7 +1,12 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Jumbotron from "../../components/Jumbotron";
+import { addBook as addBookAction } from "./librarySlice";
 
 const LibraryView = () => {
+	const libraryData = useSelector((state) => state.library.books);
+	const dispatch = useDispatch();
+
 	const initialState = {
 		title: "",
 		author: "",
@@ -11,7 +16,8 @@ const LibraryView = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(newData);
+		dispatch(addBookAction(newData));
+		setNewData(initialState);
 	};
 
 	return (
