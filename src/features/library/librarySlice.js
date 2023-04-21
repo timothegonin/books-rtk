@@ -29,9 +29,13 @@ const librarySlice = createSlice({
 			state.books = state.books.filter((book) => book.id !== action.payload);
 			updateLocalStorage(state.books);
 		},
+		deleteAllBooks: (state) => {
+			state.books = [];
+			updateLocalStorage(state.books);
+		},
 	},
 });
 
 export default librarySlice.reducer;
-export const { addBook, getLocalStorageData, deleteBook } =
+export const { addBook, getLocalStorageData, deleteBook, deleteAllBooks } =
 	librarySlice.actions;
