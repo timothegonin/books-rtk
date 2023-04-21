@@ -1,7 +1,10 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Jumbotron from "../../components/Jumbotron";
-import { addBook as addBookAction } from "./librarySlice";
+import {
+	addBook as addBookAction,
+	getLocalStorageData as getLocalStorageDataAction,
+} from "./librarySlice";
 import List from "../../common/List";
 
 const LibraryView = () => {
@@ -14,6 +17,12 @@ const LibraryView = () => {
 	};
 
 	const [newData, setNewData] = useState(initialState);
+
+	useEffect(() => {
+		if (localStorage.getItem("bookData")) {
+			dispatch(getLocalStorageDataAction());
+		}
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
