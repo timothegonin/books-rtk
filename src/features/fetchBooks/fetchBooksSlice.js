@@ -18,7 +18,24 @@ export const fetchBooks = createAsyncThunk(
 );
 
 const fetchBookSlice = createSlice({
-	name: "fetchedBooks",
+	name: "books",
 	initialState,
 	reducers: {},
+	extraReducers: (builder) => {
+		builder.addCase(fetchBooks.pending, (state) => {
+			state.isLoading = true;
+		});
+		builder.addCase(fetchBooks.fulfilled, (state, { payload }) => {
+			state.isLoading = false;
+			state.fetchedBooks = payload;
+			state.error = "";
+		});
+		builder.addCase(fetchBooks.rejected, (state, { error }) => {
+			state.isLoading = false;
+			state.fetchedBooks = [];
+			state.error = error.message;
+		});
+	},
 });
+
+export default fetchBookSlice.reducer;

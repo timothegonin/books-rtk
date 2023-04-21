@@ -1,11 +1,16 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import Jumbotron from "../../components/Jumbotron";
+import { fetchBooks as fetchBooksAsyncAction } from "./fetchBooksSlice";
 
 const FetchBooksView = () => {
+	const dispatch = useDispatch();
+
 	const [title, setTitle] = useState("");
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		dispatch(fetchBooksAsyncAction(title));
 	};
 
 	return (
