@@ -40,7 +40,7 @@ const FetchBooksView = () => {
 				</form>
 			</Jumbotron>
 			<main className="container">
-				<div className="accordion">
+				<div id="accordion">
 					{booksSliceData.isLoading ? (
 						<Spinner />
 					) : booksSliceData.error !== "" ? (
