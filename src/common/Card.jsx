@@ -1,4 +1,25 @@
+import { useState } from "react";
+import { addBook as addBookAction } from "../features/library/librarySlice";
+import { useDispatch } from "react-redux";
+
 const Card = ({ booksArray }) => {
+	const [clickedIds, setClickedIds] = useState([]);
+
+	const dispatch = useDispatch();
+
+	const handleSave = (id, title, author) => {
+		const bookToSave = {
+			title,
+			author,
+		};
+		dispatch(addBookAction(bookToSave));
+		setClickedIds([...clickedIds, id]);
+	};
+
+	const handleIsDisabled = (id) => {
+		return clickedIds.includes(id);
+	};
+
 	return booksArray.map(({ id, volumeInfo }) => (
 		<div className="card mb-2" key={id}>
 			<div className="card-header">
@@ -33,9 +54,16 @@ const Card = ({ booksArray }) => {
 					>
 						Plus d'infos
 					</a>
-					<button className="btn btn-outline-info ml-3" onClick={() => {}}>
-						Enregistrer
-					</button>
+					{!handleIsDisabled(id) && (
+						<button
+							className="btn btn-outline-info ml-3"
+							onClick={() =>
+								handleSave(id, volumeInfo.title, volumeInfo.authors)
+							}
+						>
+							Enregistrer
+						</button>
+					)}
 				</div>
 			</div>
 		</div>

@@ -39,7 +39,7 @@ const FetchBooksView = () => {
 					</div>
 				</form>
 			</Jumbotron>
-			<main className="container">
+			<main className="container mb-5">
 				<div id="accordion">
 					{booksSliceData.isLoading ? (
 						<Spinner />
